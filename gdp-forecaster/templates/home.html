@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GDP Analysis</title>
+</head>
+<body>
+    <h1>{{ message }}</h1>
+    <form action="/submit_locale" method="POST">
+        <label for="locale">Choose a Country:</label>
+        <select name="locale" id="locale">
+            {% for l in locales %}
+                <option value="{{ l }}" {% if l == 'United States' %}selected{% endif %}>{{ l }}</option>
+            {% endfor %}
+        </select>
+
+        <p>Select data visualization type:</p>
+        <table border="0">
+            {% for key, value in options.items() %}
+            <tr>
+                <td>
+                    <input type="radio" name="data_request" id="{{ key }}" value="{{ key }}" {% if loop.index == 1 %}checked{% endif %}>
+                    <label for="{{ key }}">{{ value }}</label>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

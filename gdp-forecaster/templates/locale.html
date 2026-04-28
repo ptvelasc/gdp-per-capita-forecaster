@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GDP Data for {{ locale }}</title>
+</head>
+<body>
+    <h1>GDP Data for {{ locale }}: {{ data_request }}</h1>
+
+    <!-- Check if a project is requested -->
+    {% if project %}
+        <p>Projection for the year: {{ year }}</p>
+    {% endif %}
+
+    <!-- Graph Image -->
+    <img src="{{ url_for('fig', data_request=data_request, locale=locale) }}" alt="Graph of GDP in {{ locale }}">
+
+    <!-- Form to Submit Projection Year -->
+    <form action="/submit_projection" method="POST">
+        <label for="year">Select a year to forecast:</label>
+        <input type="number" id="year" name="year" min="2024" max="2030" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+
+    <form action="{{ url_for('home') }}" method="GET">
+        <button type="submit">Back to Homepage</button>
+    </form>
+
+</body>
+</html>
